@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сайтозор — бесплатная проверка безопасности сайта</title>
+<meta name="description" content="Открытый инструмент: проверяет SSL-сертификат, защиту почты, настройки безопасности и плагины WordPress и выдаёт понятный отчёт на русском языке.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Сайтозор — бесплатная проверка безопасности сайта">
+<meta property="og:description" content="Открытый инструмент с понятным отчётом: что не так с сайтом и что сделать.">
+<meta name="theme-color" content="#1f4fb8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%231f4fb8'/%3E%3Cpath d='m10.5 16 4 4 7-8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #f6f8fc;
+  --surface: #ffffff;
+  --fg: #172033;
+  --muted: #56617a;
+  --line: #e2e7f0;
+  --accent: #1f4fb8;
+  --accent-fg: #ffffff;
+  --accent-soft: #e8efff;
+  --red: #c62828;
+  --yellow: #b26a00;
+  --green: #2e7d32;
+  --shadow: 0 1px 2px rgba(20, 30, 60, .06), 0 8px 24px rgba(20, 30, 60, .06);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1322;
+    --surface: #161d31;
+    --fg: #e9eefb;
+    --muted: #a3aec7;
+    --line: #26304a;
+    --accent: #7ea2ff;
+    --accent-fg: #0e1322;
+    --accent-soft: #1d2947;
+    --red: #ff7a7a;
+    --yellow: #ffc15e;
+    --green: #6fd08c;
+    --shadow: none;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.6 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+a { color: var(--accent); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+header.top {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; gap: 12px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 19px; color: var(--fg); text-decoration: none; }
+.brand svg { width: 28px; height: 28px; flex: none; }
+nav a { color: var(--muted); text-decoration: none; margin-left: 20px; font-size: 15px; }
+nav a:hover { color: var(--fg); }
+@media (max-width: 720px) { nav { display: none; } }
+
+.btn {
+  display: inline-block; padding: 14px 22px; border-radius: 10px; font-weight: 600;
+  text-decoration: none; border: 2px solid transparent; cursor: pointer; font-size: 16px;
+}
+.btn-primary { background: var(--accent); color: var(--accent-fg); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { border-color: var(--line); color: var(--fg); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--accent); }
+
+.hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; padding: 40px 0 64px; }
+@media (max-width: 880px) { .hero { grid-template-columns: 1fr; padding-top: 16px; } }
+.hero h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; margin: 0 0 18px; letter-spacing: -.02em; }
+.hero p.lead { font-size: 19px; color: var(--muted); margin: 0 0 28px; }
+.hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero .note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+
+.mock {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px; box-shadow: var(--shadow);
+}
+.mock .status { display: flex; gap: 14px; align-items: center; border-left: 6px solid var(--red); padding-left: 14px; margin-bottom: 18px; }
+.mock .dot { width: 34px; height: 34px; border-radius: 50%; background: var(--red); flex: none; }
+.mock .status strong { color: var(--red); display: block; }
+.mock .status span { color: var(--muted); font-size: 14px; }
+.mock ul { list-style: none; padding: 0; margin: 0; }
+.mock li { display: flex; gap: 10px; align-items: baseline; padding: 9px 0; border-top: 1px solid var(--line); font-size: 15px; }
+.pill { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 8px; color: #fff; white-space: nowrap; }
+.pill.red { background: var(--red); } .pill.yellow { background: var(--yellow); } .pill.green { background: var(--green); }
+@media (prefers-color-scheme: dark) { .pill { color: #0e1322; } }
+
+section { padding: 56px 0; }
+section h2 { font-size: clamp(26px, 3.5vw, 34px); margin: 0 0 12px; letter-spacing: -.01em; }
+section .sub { color: var(--muted); margin: 0 0 32px; max-width: 720px; }
+
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: var(--shadow); }
+.card h3 { margin: 0 0 8px; font-size: 18px; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; margin-bottom: 14px; }
+.icon svg { width: 22px; height: 22px; }
+
+.steps { counter-reset: step; }
+.steps .card { position: relative; padding-top: 56px; }
+.steps .card::before {
+  counter-increment: step; content: counter(step);
+  position: absolute; top: 18px; left: 22px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-fg); display: grid; place-items: center; font-weight: 700; font-size: 15px;
+}
+
+.band { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+@media (max-width: 880px) { .two { grid-template-columns: 1fr; } }
+.checks { list-style: none; padding: 0; margin: 0; }
+.checks li { padding: 8px 0 8px 32px; position: relative; }
+.checks li::before {
+  content: ""; position: absolute; left: 0; top: 13px; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m5 10 3.5 3.5L15 7' fill='none' stroke='%231f4fb8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;
+}
+
+.prices .card { display: flex; flex-direction: column; }
+.prices .price { font-size: 30px; font-weight: 700; margin: 6px 0 4px; }
+.prices .price small { font-size: 15px; font-weight: 500; color: var(--muted); }
+.prices ul { padding-left: 18px; margin: 12px 0 20px; color: var(--muted); font-size: 15px; flex: 1; }
+.prices .featured { border: 2px solid var(--accent); }
+.tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 3px 10px; border-radius: 8px; align-self: flex-start; }
+
+details.faq { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+details.faq summary { cursor: pointer; font-weight: 600; }
+details.faq p { color: var(--muted); margin: 10px 0 0; }
+
+.cta { text-align: center; }
+.template {
+  display: flex; gap: 10px; align-items: stretch; max-width: 640px; margin: 24px auto 0;
+  background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 12px; text-align: left;
+}
+.template code { flex: 1; font: 15px/1.5 inherit; font-family: inherit; color: var(--muted); }
+.template button { border: 1px solid var(--line); background: var(--bg); color: var(--fg); border-radius: 8px; padding: 0 14px; cursor: pointer; font: inherit; font-size: 14px; }
+@media (max-width: 560px) { .template { flex-direction: column; } .template button { padding: 8px; } }
+
+footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+pre.code {
+  position: relative; margin: 0 0 14px; padding: 14px 16px; border-radius: 12px; overflow-x: auto;
+  background: #0f1628; color: #e6ecff; font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  border: 1px solid var(--line);
+}
+pre.code .c { color: #8a97b8; }
+.code-wrap { position: relative; }
+.code-wrap pre.code { padding-top: 42px; }
+.code-wrap button {
+  position: absolute; top: 8px; right: 8px; border: 1px solid #2c3a5c; background: #18223b; color: #cbd6f5;
+  border-radius: 8px; padding: 4px 10px; font-size: 13px; cursor: pointer;
+}
+.tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.tabs button {
+  border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 999px;
+  padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer;
+}
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.soon { border: 2px dashed var(--accent); }
+.badge-soon { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 8px; }
+.free-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 880px) { .free-vs { grid-template-columns: 1fr; } }
+.free-vs .card h3 { font-size: 20px; }
+.free-vs ul { padding-left: 18px; color: var(--muted); font-size: 15px; margin: 12px 0 18px; }
+.free-vs .price { font-size: 26px; font-weight: 700; margin: 4px 0; }
+.free-vs .price small { font-size: 14px; color: var(--muted); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="currentColor" style="color:var(--accent)"/><path d="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Сайтозор</a>
+    <nav>
+      <a href="#checks">Возможности</a>
+      <a href="#install">Установка</a>
+      <a href="#monitoring">Мониторинг</a>
+      <a href="#faq">Вопросы</a>
+      <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Бесплатная проверка безопасности сайта — с понятным отчётом</h1>
+      <p class="lead">Открытый инструмент: проверяет SSL-сертификат, защиту почты от подделки, настройки безопасности и плагины WordPress — и объясняет на русском языке, что не так и что именно сделать.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#install">Установить бесплатно</a>
+        <a class="btn btn-ghost" href="example-report.html" target="_blank" rel="noopener">Пример отчёта</a>
+      </div>
+      <p class="note">Открытый инструмент <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">web-audit-pro</a> под лицензией Apache-2.0 · <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">звезда на GitHub</a> помогает проекту</p>
+    </div>
+    <div class="mock" aria-label="Фрагмент отчёта">
+      <div class="status">
+        <div class="dot"></div>
+        <div><strong>Требуются срочные действия</strong><span>shop.example · пример отчёта</span></div>
+      </div>
+      <ul>
+        <li><span class="pill red">Срочно</span> SSL-сертификат истекает через 9 дней</li>
+        <li><span class="pill red">Срочно</span> Плагин «elementor» содержит известные уязвимости</li>
+        <li><span class="pill yellow">Важно</span> Почта домена не защищена от подделки</li>
+        <li><span class="pill green">Исправлено</span> Сайт больше нельзя встроить в чужую страницу</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="checks" class="band">
+  <div class="wrap">
+    <h2>Что проверяем</h2>
+    <p class="sub">Самые частые причины, по которым небольшие сайты теряют клиентов, попадают в спам или оказываются взломаны.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>SSL-сертификат</h3>
+        <p>Действует ли сертификат и когда истекает. Истёкший сертификат — это предупреждение «сайт небезопасен» у каждого посетителя.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <h3>Защита почты</h3>
+        <p>Записи SPF и DMARC. Без них мошенники могут рассылать письма от имени вашего домена, а ваши письма чаще попадают в спам.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/></svg></div>
+        <h3>Настройки безопасности</h3>
+        <p>Защитные заголовки, cookies, перенаправления — то, что закрывает сайт от распространённых атак через браузер.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 7 10 17"/><path d="m7 9-4 3 4 3"/><path d="m17 9 4 3-4 3"/></svg></div>
+        <h3>WordPress и плагины</h3>
+        <p>Версия WordPress, список плагинов и тем, сверка версий с базой известных уязвимостей.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.2-8.2"/><path d="m16 7 2 2"/><path d="m18 5 2 2"/></svg></div>
+        <h3>Утечки ключей</h3>
+        <p>Ключи доступа к платным сервисам, случайно оставленные в коде, который видят посетители.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="report">
+  <div class="wrap two">
+    <div>
+      <h2>Отчёт, понятный не только программистам</h2>
+      <p class="sub">Кроме технических отчётов (HTML, JSON, SARIF) инструмент создаёт отдельный отчёт для владельца сайта.</p>
+      <ul class="checks">
+        <li>Светофор: всё хорошо, есть замечания или нужны срочные действия</li>
+        <li>Для каждой проблемы — что это значит и что сделать</li>
+        <li>Что изменилось с прошлой проверки; исправления подтверждаются повторной проверкой</li>
+        <li>Ваш логотип и название — удобно для веб-студий</li>
+        <li>Один HTML-файл, сохраняется в PDF через печать</li>
+      </ul>
+      <p><a class="btn btn-ghost" href="example-report.html" target="_blank" rel="noopener">Открыть пример отчёта</a></p>
+    </div>
+    <div class="mock" aria-label="Фрагмент раздела изменений">
+      <strong>Изменения с прошлой проверки</strong>
+      <ul>
+        <li><span class="pill green">Исправлено</span> SPF разрешал отправлять почту от вашего имени кому угодно</li>
+        <li><span class="pill green">Исправлено</span> Сайт можно было встроить в чужую страницу</li>
+        <li><span class="pill red">Новое</span> SSL-сертификат скоро истечёт</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="install" class="band">
+  <div class="wrap">
+    <h2>Установка</h2>
+    <p class="sub">Инструмент Сайтозора распространяется на GitHub под названием <code>web-audit-pro</code>. Нужен Python 3.11 или новее. Проверяйте только свои сайты или сайты, на проверку которых у вас есть разрешение.</p>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="linux">Linux (Kali, Debian, Ubuntu)</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="docker">Docker</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="python">Windows / macOS</button>
+    </div>
+    <div data-panel="linux">
+      <div class="code-wrap"><pre class="code">git clone https://github.com/HackToolWork/web-audit-pro.git
+cd web-audit-pro
+sudo ./install.sh</pre><button type="button" class="copy">Копировать</button></div>
+    </div>
+    <div data-panel="docker" hidden>
+      <div class="code-wrap"><pre class="code">git clone https://github.com/HackToolWork/web-audit-pro.git
+cd web-audit-pro
+docker build -t web-audit-pro:local .
+mkdir -p reports
+docker run --rm -u "$(id -u):$(id -g)" -v "$PWD/reports:/app/reports" \
+  web-audit-pro:local https://ваш-сайт.ru --yes-i-am-authorized --lang ru</pre><button type="button" class="copy">Копировать</button></div>
+    </div>
+    <div data-panel="python" hidden>
+      <div class="code-wrap"><pre class="code">git clone https://github.com/HackToolWork/web-audit-pro.git
+cd web-audit-pro
+python -m venv .venv
+.venv\Scripts\activate        <span class="c"># macOS: source .venv/bin/activate</span>
+python -m pip install .</pre><button type="button" class="copy">Копировать</button></div>
+    </div>
+    <h3 style="margin:28px 0 10px">Проверка сайта</h3>
+    <div class="code-wrap"><pre class="code">web-audit https://ваш-сайт.ru --yes-i-am-authorized --lang ru --company "Моя студия"</pre><button type="button" class="copy">Копировать</button></div>
+    <p class="sub" style="margin:0">Отчёты появятся в папке <code>reports/</code>; отчёт для владельца — файл <code>owner-report-*.html</code>. Подробности — в <a href="https://github.com/HackToolWork/web-audit-pro#readme" target="_blank" rel="noopener">документации</a>.</p>
+  </div>
+</section>
+
+<section id="monitoring">
+  <div class="wrap">
+    <h2>Не хотите ничего устанавливать?</h2>
+    <p class="sub">Готовим автоматический мониторинг: инструмент сам проверяет сайт и пишет, если что-то сломалось. Бесплатная версия остаётся бесплатной навсегда.</p>
+    <div class="free-vs">
+      <div class="card">
+        <h3>Инструмент</h3>
+        <div class="price">0 ₽ <small>навсегда</small></div>
+        <ul>
+          <li>Все проверки и все отчёты</li>
+          <li>Ваш логотип в отчётах</li>
+          <li>Запуск на своём компьютере или сервере</li>
+          <li>Открытый код</li>
+        </ul>
+        <a class="btn btn-ghost" href="#install">Установить</a>
+      </div>
+      <div class="card soon">
+        <span class="badge-soon">Скоро</span>
+        <h3 style="margin-top:12px">Мониторинг</h3>
+        <div class="price">от 990 ₽ <small>/ мес · планируемая цена</small></div>
+        <ul>
+          <li>Ничего не нужно устанавливать — только адрес сайта</li>
+          <li>Автоматическая проверка каждую неделю</li>
+          <li>Письмо, если истекает сертификат или найдена уязвимость</li>
+          <li>История изменений и ежемесячный отчёт</li>
+          <li>Для студий: все сайты клиентов и отчёты с вашим логотипом</li>
+        </ul>
+        <a class="btn btn-primary" href="https://t.me/xxx_5d" target="_blank" rel="noopener">Узнать о запуске первым</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="band">
+  <div class="wrap">
+    <h2>Частые вопросы</h2>
+    <details class="faq">
+      <summary>Это действительно бесплатно?</summary>
+      <p>Да. Инструмент распространяется с открытым кодом под лицензией Apache-2.0 — его можно использовать, в том числе в коммерческих целях. Платным будет только готовый сервис мониторинга, где не нужно ничего устанавливать.</p>
+    </details>
+    <details class="faq">
+      <summary>Это не взлом? Сайту ничего не будет?</summary>
+      <p>Нет. Инструмент делает только обычные запросы — такие же, как браузер при посещении сайта, — с ограничением скорости. Он не подбирает пароли, не отправляет вредоносные данные и не нагружает сервер. Проверяйте только свои сайты или сайты, на проверку которых у вас есть разрешение.</p>
+    </details>
+    <details class="faq">
+      <summary>Нужно ли быть программистом?</summary>
+      <p>Нужно уметь установить программу и запустить одну команду в терминале — инструкция выше. Если это неудобно, подождите запуска мониторинга: там будет достаточно ввести адрес сайта.</p>
+    </details>
+    <details class="faq">
+      <summary>Откуда данные об уязвимостях WordPress?</summary>
+      <p>Из базы Wordfence Intelligence. Её можно бесплатно скачать один раз командой <code>web-audit --update-wp-db</code> (нужен бесплатный API-ключ Wordfence) — дальше проверки работают без интернета.</p>
+    </details>
+    <details class="faq">
+      <summary>Гарантирует ли отчёт, что сайт не взломают?</summary>
+      <p>Нет, и мы честно об этом пишем. Автоматическая проверка находит самые распространённые проблемы, но не заменяет полноценный аудит безопасности.</p>
+    </details>
+    <details class="faq">
+      <summary>Как помочь проекту?</summary>
+      <p>Поставьте звезду на <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a>, расскажите коллегам, сообщайте об ошибках и предлагайте улучшения в Issues.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Сайтозор · инструмент web-audit-pro под лицензией Apache-2.0</span>
+    <span>Сайт не собирает персональные данные и не использует cookies. <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a> · <a href="https://t.me/xxx_5d" target="_blank" rel="noopener">Telegram</a></span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll(".tabs button").forEach(function (tab) {
+  tab.addEventListener("click", function () {
+    document.querySelectorAll(".tabs button").forEach(function (other) {
+      other.setAttribute("aria-selected", String(other === tab));
+    });
+    document.querySelectorAll("[data-panel]").forEach(function (panel) {
+      panel.hidden = panel.getAttribute("data-panel") !== tab.getAttribute("data-tab");
+    });
+  });
+});
+document.querySelectorAll(".code-wrap .copy").forEach(function (button) {
+  button.addEventListener("click", function () {
+    var text = button.parentElement.querySelector("pre").innerText.replace(/\s+# macOS.*$/m, "");
+    function done(label) { button.textContent = label; setTimeout(function () { button.textContent = "Копировать"; }, 2000); }
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () { done("Скопировано"); }, function () { done("Не удалось"); });
+    } else {
+      done("Не удалось");
+    }
+  });
+});
+</script>
+</body>
+</html>
