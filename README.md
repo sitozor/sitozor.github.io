@@ -24,15 +24,11 @@ sed -i "s/xxx_5d/новый_ник/g" index.html
 ~/Music/web-audit-pro/.venv/bin/python scripts/make_example_report.py
 ```
 
-## Публикация на GitHub Pages
+## Публикация
 
-Бесплатный GitHub Pages работает для публичных репозиториев:
-
-```bash
-git add -A && git commit -m "Add project page"
-gh repo create HackToolWork/webaudit-landing --public --source=. --push
-gh api -X POST repos/HackToolWork/webaudit-landing/pages -f "source[branch]=main" -f "source[path]=/"
-```
-
-Через 1–2 минуты страница будет доступна по адресу
-`https://hacktoolwork.github.io/webaudit-landing/`.
+Сайт публикуется GitHub Pages из ветки `main` репозитория
+`sitozor/sitozor.github.io` и доступен по адресу https://sitozor.ru
+(файл `CNAME`). DNS домена у REG.RU: четыре A-записи `@` на адреса GitHub Pages
+185.199.108–111.153, CNAME `www` → `sitozor.github.io.`, SPF `v=spf1 -all` и
+DMARC `p=reject` (домен не отправляет почту). Домен подтверждён в настройках
+организации GitHub (TXT `_github-pages-challenge-sitozor`) — не удаляйте эту запись.
