@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Example — Website security report — https://shop.example</title><style>
+:root{--fg:#1d2433;--muted:#5b6475;--line:#e3e7ef;--bg:#f5f7fb;--card:#fff;
+--red:#c62828;--yellow:#b26a00;--green:#2e7d32;--grey:#6b7280;--accent:#2457c5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+font:16px/1.55 -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 48px}
+header{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:36px 0 12px}
+.meta{color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;
+margin:12px 0}
+.status{border-left:8px solid var(--c);display:flex;gap:16px;align-items:center}
+.status .dot{width:44px;height:44px;border-radius:50%;background:var(--c);flex:none}
+.status h2{margin:0 0 4px;color:var(--c)}
+.status p{margin:0}
+.red{--c:var(--red)}.yellow{--c:var(--yellow)}.green{--c:var(--green)}
+.unknown,.incomplete{--c:var(--grey)}
+.status p.notice{margin-top:8px;font-weight:600}
+.areas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.areas .card{margin:0}
+.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:13px;font-weight:600;
+color:#fff;background:var(--c)}
+.area-ok{--c:var(--green)}.area-urgent{--c:var(--red)}.area-issues{--c:var(--yellow)}
+.area-detected{--c:var(--accent)}.area-failed,.area-not_checked,.area-not_detected{--c:var(--grey)}
+.level-high{--c:var(--red)}.level-medium{--c:var(--yellow)}.level-low{--c:var(--accent)}
+.level-info{--c:var(--grey)}
+.area-notes{font-weight:600;font-size:14px;margin-top:6px}
+.item h3{margin:6px 0 8px;font-size:17px}
+.item dt{font-weight:600;margin-top:8px}.item dd{margin:2px 0 0}
+.note{background:#fff7e6;border-radius:8px;padding:8px 12px;margin-top:10px;font-size:14px}
+details{margin-top:10px;font-size:14px;color:var(--muted)}
+details code{word-break:break-all}
+ul.changes{margin:0;padding-left:20px}
+table.components{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+table.components th,table.components td{text-align:left;padding:6px 8px;
+border-bottom:1px solid var(--line)}
+table.components td:nth-child(2){word-break:break-word}
+footer{margin-top:40px;color:var(--muted);font-size:13px}
+@media print{body{background:#fff}.card{break-inside:avoid}main{padding:0}}
+</style></head>
+<body><main><div style="background:#fff3cd;color:#5c4400;border-radius:10px;padding:10px 14px;margin-bottom:20px;font-size:14px">This is an <strong>example report</strong> for the fictional site shop.example. Vulnerability titles are placeholders. <a href="/en/" style="color:#5c4400">← Back to the home page</a></div>
+<header><div><h1>Website security report</h1>
+<div class="meta">https://shop.example · Checked on: 2026-09-29
+ · Prepared by: Sitozor</div></div></header>
+<div class="card status red"><div class="dot"></div><div>
+<h2>Urgent action needed</h2><p>Some problems may already be hurting your business. Start with the &#x27;Urgent&#x27; items.</p>
+</div></div>
+<h2>What was checked</h2><div class="areas"><div class="card"><strong>SSL certificate</strong><br><span class="pill area-urgent">Urgent</span><div class="meta">Whether the certificate is valid and when it expires</div></div><div class="card"><strong>Email protection</strong><br><span class="pill area-issues">Issues found</span><div class="meta">SPF and DMARC — protection against email spoofing your domain</div></div><div class="card"><strong>Site security settings</strong><br><span class="pill area-issues">Issues found</span><div class="meta">Security headers, cookies, redirects</div></div><div class="card"><strong>Site platform</strong><br><span class="pill area-urgent">Urgent</span><div class="area-notes">WordPress 6.5.3 · plugins and themes: 4</div><div class="meta">Which CMS the site runs, plus WordPress plugins and themes. Known versions were checked against the Wordfence vulnerability database of 2026-09-29.</div></div><div class="card"><strong>Leaked keys</strong><br><span class="pill area-ok">OK</span><div class="meta">Access keys in code that visitors can see</div></div></div>
+<h2>Changes since the last check</h2><div class="card"><p><strong>Fixed (confirmed by recheck): 2</strong></p><ul class="changes"><li>SPF allows anyone to send email in your name</li><li>The site can be embedded in other pages</li></ul><p><strong>New issues: 1</strong></p><ul class="changes"><li>The SSL certificate expires soon</li></ul><p><strong>Still open: 2</strong></p><ul class="changes"><li>No Content Security Policy (CSP)</li><li>Your domain&#x27;s email is not protected from spoofing (no DMARC)</li></ul></div>
+<h2>What to do</h2><div class="card item"><span class="pill level-high">Urgent</span><h3>The SSL certificate expires soon</h3><dl><dt>What it means</dt><dd>Once it expires, browsers will warn visitors that the site is not secure.</dd><dt>What to do</dt><dd>Renew the certificate in advance and confirm that automatic renewal works.</dd></dl><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>tls.certificate_expiring</code></p><ul><li><code>https://shop.example/</code></li><li>shop.example:443: certificate expires on 2026-10-08 (9 day(s) left).</li></ul></details></div><div class="card item"><span class="pill level-high">Urgent</span><h3>Plugin &#x27;elementor&#x27; version 3.18.0 has known vulnerabilities</h3><dl><dt>What it means</dt><dd>Plugin and theme vulnerabilities are the most common way WordPress sites get hacked. Ready-made attack tools often exist for known vulnerabilities.</dd><dt>What to do</dt><dd>Update to version 3.18.2 or later. Back up the site first.</dd></dl><div class="note">The automated check is not certain about this finding — have a specialist confirm it before fixing.</div><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>wordpress.vulnerable.plugin.elementor</code></p><ul><li><code>https://shop.example/</code></li><li>WordPress plugin elementor version 3.18.0 matches 2 known vulnerabilities; fixed in 3.18.2: Example: Stored Cross-Site Scripting; Example: Missing Authorization. Source: Wordfence Intelligence.</li></ul></details></div><div class="card item"><span class="pill level-medium">Important</span><h3>Cookies may be sent without encryption</h3><dl><dt>What it means</dt><dd>If the cookie keeps users logged in, it could be intercepted on public Wi-Fi.</dd><dt>What to do</dt><dd>Add the Secure attribute to cookies. Forward this task to your site developer or hosting support.</dd></dl><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>cookies.secure</code></p><ul><li><code>https://shop.example/</code></li><li>Set-Cookie: shop_session=…; HttpOnly; Path=/</li></ul></details></div><div class="card item"><span class="pill level-medium">Important</span><h3>Your domain&#x27;s email is not protected from spoofing (no DMARC)</h3><dl><dt>What it means</dt><dd>Fraudsters can send email that appears to come from your domain, such as fake invoices to customers. Your real emails are also more likely to land in spam.</dd><dt>What to do</dt><dd>Add a DMARC DNS record: start in monitoring mode (p=none) with a reporting address, then move to p=quarantine or p=reject. This is done in your DNS provider&#x27;s panel.</dd></dl><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>dns.dmarc.missing</code></p><ul><li><code>https://shop.example/</code></li><li>No v=DMARC1 TXT record was resolved at _dmarc.shop.example or its parent domain.</li></ul></details></div><div class="card item"><span class="pill level-low">Recommended</span><h3>No Content Security Policy (CSP)</h3><dl><dt>What it means</dt><dd>CSP limits which scripts a page may run and reduces the damage if malicious code is injected into the site.</dd><dt>What to do</dt><dd>For your developer: introduce a Content-Security-Policy, starting in Report-Only mode so nothing breaks.</dd></dl><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>headers.csp</code></p><ul><li><code>https://shop.example/</code></li><li>No Content-Security-Policy header.</li></ul></details></div><div class="card item"><span class="pill level-info">For information</span><h3>Site platform detected</h3><dl><dt>What it means</dt><dd>For information. Outdated CMS and plugin versions are the most common cause of small-site compromises.</dd><dt>What to do</dt><dd>Keep the CMS, themes and plugins updated and remove unused ones.</dd></dl><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>cms.detected.wordpress</code></p><ul><li><code>https://shop.example/</code></li><li>Detected WordPress version 6.5.3 (body:wp-content/; header:Link=api.w.org).</li></ul></details></div><div class="card item"><span class="pill level-info">For information</span><h3>The site reveals its software</h3><dl><dt>What it means</dt><dd>Not a vulnerability by itself, but it helps attackers pick attacks for your software version.</dd><dt>What to do</dt><dd>Where possible, hide versions in the Server and X-Powered-By headers.</dd></dl><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>info.stack_headers</code></p><ul><li><code>https://shop.example/</code></li><li>X-Powered-By: PHP/8.1.2</li></ul></details></div><div class="card item"><span class="pill level-info">For information</span><h3>WordPress plugins and themes found on the site</h3><dl><dt>What it means</dt><dd>Outdated plugins and themes are the most common way WordPress sites get hacked. The list comes from page code, so it may be incomplete and versions may be inexact.</dd><dt>What to do</dt><dd>Make sure everything listed is updated to the latest version and remove unused plugins and themes. Enable automatic updates where it is safe.</dd></dl><table class="components"><thead><tr><th>Type</th><th>Name</th><th>Version</th></tr></thead><tbody><tr><td>Plugin</td><td>contact-form-7</td><td>unknown</td></tr><tr><td>Plugin</td><td>elementor</td><td>3.18.0</td></tr><tr><td>Plugin</td><td>woocommerce</td><td>8.9.1</td></tr><tr><td>Theme</td><td>astra</td><td>4.6.4</td></tr></tbody></table><details><summary>Technical details for your developer (Affected addresses: 1)</summary><p><code>wordpress.components</code></p><ul><li><code>https://shop.example/</code></li></ul></details></div>
+<footer>This report was produced by an automated, non-intrusive check. It does not guarantee the absence of vulnerabilities and does not replace a full security audit. The check was performed with the site owner&#x27;s permission.<p>WordPress vulnerability data: Wordfence Intelligence (database of 2026-09-29).</p></footer>
+</main></body></html>

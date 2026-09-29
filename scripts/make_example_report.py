@@ -104,21 +104,41 @@ lifecycle = {
         {"rule_id": "dns.dmarc.missing", "url": "u", "severity": "medium"},
     ],
 }
-data = build_owner_summary(
-    [root],
-    coverage={"tls": "checked", "email": "checked", "cms": "checked", "js": "checked"},
-    lifecycle=lifecycle,
-    lang="ru",
-    wp_vulns_checked_on=datetime.now(UTC).strftime("%Y-%m-%d"),
-)
-page = render_owner_report_html("https://shop.example", data, company="Сайтозор")
-banner = (
-    '<div style="background:#fff3cd;color:#5c4400;border-radius:10px;padding:10px 14px;'
-    'margin-bottom:20px;font-size:14px">Это <strong>пример отчёта</strong> для вымышленного '
-    "сайта shop.example. Названия уязвимостей условные. "
-    '<a href="index.html" style="color:#5c4400">← Вернуться на главную</a></div>'
-)
-page = page.replace("<main>", "<main>" + banner, 1)
-page = page.replace("<title>", '<meta name="robots" content="noindex"><title>Пример — ', 1)
-OUTPUT.write_text(page, encoding="utf-8")
-print(f"Wrote {OUTPUT} (status: {data['status']})")
+BANNERS = {
+    "ru": (
+        "Это <strong>пример отчёта</strong> для вымышленного сайта shop.example. "
+        "Названия уязвимостей условные. ",
+        "← Вернуться на главную",
+        "Пример — ",
+    ),
+    "en": (
+        "This is an <strong>example report</strong> for the fictional site shop.example. "
+        "Vulnerability titles are placeholders. ",
+        "← Back to the home page",
+        "Example — ",
+    ),
+}
+
+for lang, output, home, company in (
+    ("ru", OUTPUT, "/", "Сайтозор"),
+    ("en", OUTPUT.parent / "en" / "example-report.html", "/en/", "Sitozor"),
+):
+    data = build_owner_summary(
+        [root],
+        coverage={"tls": "checked", "email": "checked", "cms": "checked", "js": "checked"},
+        lifecycle=lifecycle,
+        lang=lang,
+        wp_vulns_checked_on=datetime.now(UTC).strftime("%Y-%m-%d"),
+    )
+    page = render_owner_report_html("https://shop.example", data, company=company)
+    note, back, prefix = BANNERS[lang]
+    banner = (
+        '<div style="background:#fff3cd;color:#5c4400;border-radius:10px;padding:10px 14px;'
+        f'margin-bottom:20px;font-size:14px">{note}'
+        f'<a href="{home}" style="color:#5c4400">{back}</a></div>'
+    )
+    page = page.replace("<main>", "<main>" + banner, 1)
+    page = page.replace("<title>", f'<meta name="robots" content="noindex"><title>{prefix}', 1)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(page, encoding="utf-8")
+    print(f"Wrote {output} (status: {data['status']})")

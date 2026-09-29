@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sitozor — free website security check</title>
+<meta name="description" content="An open-source tool that checks the SSL certificate, email spoofing protection, security settings and WordPress plugins, and explains the results in plain language.">
+<link rel="canonical" href="https://sitozor.ru/en/">
+<link rel="alternate" hreflang="ru" href="https://sitozor.ru/">
+<link rel="alternate" hreflang="en" href="https://sitozor.ru/en/">
+<link rel="alternate" hreflang="x-default" href="https://sitozor.ru/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sitozor.ru/en/">
+<meta property="og:title" content="Sitozor — free website security check">
+<meta property="og:description" content="An open-source tool that checks the SSL certificate, email spoofing protection, security settings and WordPress plugins, and explains the results in plain language.">
+<meta name="theme-color" content="#1f4fb8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%231f4fb8'/%3E%3Cpath d='m10.5 16 4 4 7-8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/en/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="currentColor" style="color:var(--accent)"/><path d="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sitozor</a>
+    <nav>
+      <a href="#checks">Features</a>
+      <a href="#install">Install</a>
+      <a href="#monitoring">Monitoring</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <a class="lang-switch" href="/" data-lang="ru" hreflang="ru">Русский</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Free website security check — with a report anyone can read</h1>
+      <p class="lead">An open-source tool that checks your SSL certificate, email spoofing protection, security settings and WordPress plugins — and explains in plain language what is wrong and exactly what to do.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#install">Install for free</a>
+        <a class="btn btn-ghost" href="/en/example-report.html" target="_blank" rel="noopener">Example report</a>
+      </div>
+      <p class="note">Open-source <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">web-audit-pro</a> under the Apache-2.0 license · a star on GitHub helps the project</p>
+    </div>
+    <div class="mock" aria-label="Example report">
+      <div class="status">
+        <div class="dot"></div>
+        <div><strong>Urgent action needed</strong><span>shop.example · example report</span></div>
+      </div>
+      <ul>
+        <li><span class="pill red">Urgent</span> SSL certificate expires in 9 days</li>
+        <li><span class="pill red">Urgent</span> Plugin &#x27;elementor&#x27; has known vulnerabilities</li>
+        <li><span class="pill yellow">Important</span> Domain email is not protected from spoofing</li>
+        <li><span class="pill green">Fixed</span> The site can no longer be embedded in other pages</li></ul>
+    </div>
+  </div>
+</div>
+
+<section id="checks" class="band">
+  <div class="wrap">
+    <h2>What we check</h2>
+    <p class="sub">The most common reasons small websites lose customers, land in spam folders or get hacked.</p>
+    <div class="grid">
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>SSL certificate</h3><p>Whether the certificate is valid and when it expires. An expired certificate means a &#x27;not secure&#x27; warning for every visitor.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><h3>Email protection</h3><p>SPF and DMARC records. Without them, scammers can send email in your domain&#x27;s name, and your own mail lands in spam more often.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/></svg></div><h3>Security settings</h3><p>Security headers, cookies and redirects — what protects the site from common browser-based attacks.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 7 10 17"/><path d="m7 9-4 3 4 3"/><path d="m17 9 4 3-4 3"/></svg></div><h3>WordPress and plugins</h3><p>The WordPress version, plugins and themes, checked against a database of known vulnerabilities.</p></div>
+      <div class="card"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.2-8.2"/><path d="m16 7 2 2"/><path d="m18 5 2 2"/></svg></div><h3>Leaked keys</h3><p>Access keys to paid services accidentally left in code that visitors can see.</p></div></div>
+  </div>
+</section>
+
+<section id="report">
+  <div class="wrap two">
+    <div>
+      <h2>A report that is not just for programmers</h2>
+      <p class="sub">Besides technical reports (HTML, JSON, SARIF), the tool creates a separate report for the site owner.</p>
+      <ul class="checks">
+          <li>Traffic light: all good, issues found, or urgent action needed</li>
+          <li>For every issue — what it means and what to do</li>
+          <li>What changed since the last check; fixes are confirmed by a recheck</li>
+          <li>Your logo and name — handy for web studios</li>
+          <li>A single HTML file that prints nicely to PDF</li></ul>
+      <p><a class="btn btn-ghost" href="/en/example-report.html" target="_blank" rel="noopener">Open the example report</a></p>
+    </div>
+    <div class="mock">
+      <strong>Changes since the last check</strong>
+      <ul>
+        <li><span class="pill green">Fixed</span> SPF allowed anyone to send email in your name</li>
+        <li><span class="pill green">Fixed</span> The site could be embedded in other pages</li>
+        <li><span class="pill red">New</span> SSL certificate expires soon</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="install" class="band">
+  <div class="wrap">
+    <h2>Install</h2>
+    <p class="sub">Sitozor's tool is published on GitHub as <code>web-audit-pro</code>. It needs Python 3.11 or newer. Only check sites you own or are allowed to test.</p>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="linux">Linux (Kali, Debian, Ubuntu)</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="docker">Docker</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="python">Windows / macOS</button>
+    </div>
+    <div data-panel="linux">
+      <div class="code-wrap"><pre class="code">git clone https://github.com/HackToolWork/web-audit-pro.git
+cd web-audit-pro
+sudo ./install.sh</pre><button type="button" class="copy">Copy</button></div>
+    </div>
+    <div data-panel="docker" hidden>
+      <div class="code-wrap"><pre class="code">git clone https://github.com/HackToolWork/web-audit-pro.git
+cd web-audit-pro
+docker build -t web-audit-pro:local .
+mkdir -p reports
+docker run --rm -u "$(id -u):$(id -g)" -v "$PWD/reports:/app/reports" \
+  web-audit-pro:local https://your-site.com --yes-i-am-authorized --lang en</pre><button type="button" class="copy">Copy</button></div>
+    </div>
+    <div data-panel="python" hidden>
+      <div class="code-wrap"><pre class="code">git clone https://github.com/HackToolWork/web-audit-pro.git
+cd web-audit-pro
+python -m venv .venv
+.venv\Scripts\activate        <span class="c"># macOS: source .venv/bin/activate</span>
+python -m pip install .</pre><button type="button" class="copy">Copy</button></div>
+    </div>
+    <h3 style="margin:28px 0 10px">Check a site</h3>
+    <div class="code-wrap"><pre class="code">web-audit https://your-site.com --company &quot;My Studio&quot;</pre><button type="button" class="copy">Copy</button></div>
+    <p class="sub" style="margin:0">Reports appear in the <code>reports/</code> folder; the owner report is <code>owner-report-*.html</code>. The report language follows your system settings. See the <a href="https://github.com/HackToolWork/web-audit-pro#readme" target="_blank" rel="noopener">documentation</a> for details.</p>
+  </div>
+</section>
+
+<section id="monitoring">
+  <div class="wrap">
+    <h2>Don&#x27;t want to install anything?</h2>
+    <p class="sub">We are building automatic monitoring: the service checks your site on its own and tells you when something breaks. The free tool stays free forever.</p>
+    <div class="free-vs">
+      <div class="card">
+        <h3>Tool</h3>
+        <div class="price">$0 <small>forever</small></div>
+        <ul>
+          <li>Every check and every report</li>
+          <li>Your logo in reports</li>
+          <li>Runs on your own computer or server</li>
+          <li>Open source</li></ul>
+        <a class="btn btn-ghost" href="#install">Install</a>
+      </div>
+      <div class="card soon">
+        <span class="badge-soon">Coming soon</span>
+        <h3 style="margin-top:12px">Monitoring</h3>
+        <div class="price"><small>Pricing will be announced</small></div>
+        <ul>
+          <li>Nothing to install — just your site&#x27;s address</li>
+          <li>Automatic weekly or daily checks</li>
+          <li>Alerts when a certificate is expiring or a vulnerability is found</li>
+          <li>Change history and a monthly report</li>
+          <li>For studios: client sites and reports with your logo</li></ul>
+        <a class="btn btn-primary" href="https://t.me/xxx_5d" target="_blank" rel="noopener">Get notified at launch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="band">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    
+    <details class="faq"><summary>Is it really free?</summary><p>Yes. The tool is open source under the Apache-2.0 license — you can use it, including commercially. Only the hosted monitoring service, where nothing needs to be installed, will be paid.</p></details>
+    <details class="faq"><summary>Is this hacking? Will it harm my site?</summary><p>No. The tool only makes ordinary requests — the same ones a browser makes when visiting a site — with rate limiting. It does not guess passwords, send malicious data or overload the server. Only check sites you own or are allowed to test.</p></details>
+    <details class="faq"><summary>Do I need to be a programmer?</summary><p>You need to install the program and run one command in a terminal — see the instructions above. If that is inconvenient, wait for the monitoring service: entering your site's address will be enough.</p></details>
+    <details class="faq"><summary>Where does the WordPress vulnerability data come from?</summary><p>From Wordfence Intelligence. You can download it for free with <code>web-audit --update-wp-db</code> (a free Wordfence API key is required); checks then work offline.</p></details>
+    <details class="faq"><summary>Does the report guarantee my site won&#x27;t be hacked?</summary><p>No, and we say so honestly. An automated check finds the most common problems but does not replace a full security audit.</p></details>
+    <details class="faq"><summary>How can I help?</summary><p>Star the project on <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a>, tell your colleagues, report bugs and suggest improvements in Issues.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Sitozor · web-audit-pro tool under the Apache-2.0 license</span>
+    <span>This site collects no personal data and uses no cookies. <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a> · <a href="https://t.me/xxx_5d" target="_blank" rel="noopener">Telegram</a></span>
+  </div>
+</footer>
+
+<script>window.SITE_TEXT = {copy: "Copy", copied: "Copied", failed: "Failed"};</script>
+<script src="/assets/site.js"></script>
+</body>
+</html>

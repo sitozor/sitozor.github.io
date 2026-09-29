@@ -1,24 +1,25 @@
 # Сайтозор — страница проекта
 
-Статическая страница для GitHub Pages о бесплатном открытом инструменте
-[web-audit-pro](https://github.com/HackToolWork/web-audit-pro):
-`index.html` (возможности, установка, анонс платного мониторинга) и
-`example-report.html` (пример отчёта для вымышленного сайта `shop.example`).
-Сайт не собирает персональные данные; кнопка «Узнать о запуске первым» ведёт
-в Telegram `@xxx_5d`.
+Страница бесплатного открытого инструмента
+[web-audit-pro](https://github.com/HackToolWork/web-audit-pro) на двух языках:
+`/` — русский, `/en/` — английский. Посетитель с неанглоязычным браузером
+остаётся на русской версии; с другим языком браузера при первом заходе
+переходит на `/en/`. Выбор в переключателе языка запоминается, поисковые роботы
+не перенаправляются. Сайт не собирает персональные данные и не использует cookies.
 
-Сменить Telegram во всех ссылках:
+## Как менять тексты
+
+Страницы собираются из одного шаблона — правьте тексты в `scripts/build.py`
+(словарь `CONTENT`), а не в `index.html` и `en/index.html`:
 
 ```bash
-sed -i "s/xxx_5d/новый_ник/g" index.html
+python3 scripts/build.py
 ```
 
-Планируемая цена мониторинга — в разделе `id="monitoring"` файла `index.html`.
+Общие стили — `assets/style.css`, скрипты — `assets/site.js`.
 
-## Пример отчёта
-
-`example-report.html` создаётся настоящим генератором отчётов web-audit-pro.
-После изменений в инструменте пересоберите его:
+Примеры отчётов (`example-report.html`, `en/example-report.html`) создаются
+настоящим генератором отчётов web-audit-pro:
 
 ```bash
 ~/Music/web-audit-pro/.venv/bin/python scripts/make_example_report.py
