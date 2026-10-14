@@ -27,9 +27,20 @@ python3 scripts/build.py
 
 ## Публикация
 
-Сайт публикуется GitHub Pages из ветки `main` репозитория
-`sitozor/sitozor.github.io` и доступен по адресу https://sitozor.ru
-(файл `CNAME`). DNS домена у REG.RU: четыре A-записи `@` на адреса GitHub Pages
-185.199.108–111.153, CNAME `www` → `sitozor.github.io.`, SPF `v=spf1 -all` и
-DMARC `p=reject` (домен не отправляет почту). Домен подтверждён в настройках
-организации GitHub (TXT `_github-pages-challenge-sitozor`) — не удаляйте эту запись.
+Сайт работает на сервере Сайтозора (https://sitozor.ru, nginx со строгими
+заголовками и сертификатом Let's Encrypt; настройка сервера — в приватном
+репозитории `sitozor/sitozor-service`, `deploy/setup-site.sh`). Выкладка
+закоммиченной версии:
+
+```bash
+./deploy.sh root@89.108.76.133
+```
+
+Скрипт отправляет по SSH только публикуемые файлы (`index.html`, `en/`,
+`assets/`, примеры отчётов, `.well-known/security.txt`, `robots.txt`,
+`sitemap.xml`) и выставляет им права на чтение.
+
+GitHub Pages продолжает раздавать этот репозиторий как зеркало
+https://sitozor.github.io без собственного домена. Страницы не содержат
+встроенных скриптов и стилей, чтобы сервер мог отдавать строгую CSP — сохраняйте
+это при правках шаблона.
