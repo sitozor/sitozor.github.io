@@ -7,7 +7,8 @@ cd "$(git rev-parse --show-toplevel)"
 REV="$(git rev-parse --short HEAD)"
 # Only published files: no build scripts, README or repository metadata. Files get
 # world-readable permissions here, whatever they are in the local checkout.
-git archive --format=tar HEAD index.html en assets example-report.html | ssh "$HOST" "set -e
+git archive --format=tar HEAD index.html en assets example-report.html \
+    .well-known robots.txt sitemap.xml | ssh "$HOST" "set -e
 rm -rf /var/www/sitozor.new && mkdir -p /var/www/sitozor.new
 tar -x --no-same-owner -C /var/www/sitozor.new
 find /var/www/sitozor.new -type d -exec chmod 755 {} +

@@ -495,7 +495,43 @@ def render(lang: str) -> str:
     return TEMPLATE.substitute(values)
 
 
+def write_static() -> None:
+    """security.txt (RFC 9116), robots.txt and a bilingual sitemap."""
+    from datetime import UTC, datetime, timedelta
+
+    expires = (datetime.now(UTC) + timedelta(days=330)).strftime("%Y-%m-%dT00:00:00.000Z")
+    well_known = ROOT / ".well-known"
+    well_known.mkdir(exist_ok=True)
+    (well_known / "security.txt").write_text(
+        f"Contact: {GITHUB}/security/advisories/new\n"
+        f"Expires: {expires}\n"
+        "Preferred-Languages: ru, en\n"
+        f"Canonical: {SITE}/.well-known/security.txt\n"
+        f"Policy: {GITHUB}/blob/main/SECURITY.md\n",
+        encoding="utf-8",
+    )
+    (ROOT / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8"
+    )
+    alternates = "".join(
+        f'\n    <xhtml:link rel="alternate" hreflang="{lang}" href="{SITE}{text["path"]}"/>'
+        for lang, text in CONTENT.items()
+    )
+    urls = "".join(
+        f"\n  <url>\n    <loc>{SITE}{text['path']}</loc>{alternates}\n  </url>"
+        for text in CONTENT.values()
+    )
+    (ROOT / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        f'xmlns:xhtml="http://www.w3.org/1999/xhtml">{urls}\n</urlset>\n',
+        encoding="utf-8",
+    )
+    print("Wrote .well-known/security.txt, robots.txt, sitemap.xml")
+
+
 def main() -> None:
+    write_static()
     for lang, text in CONTENT.items():
         target = ROOT / text["path"].strip("/") / "index.html"
         target.parent.mkdir(parents=True, exist_ok=True)

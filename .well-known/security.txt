@@ -1,0 +1,5 @@
+Contact: https://github.com/HackToolWork/web-audit-pro/security/advisories/new
+Expires: 2027-09-09T00:00:00.000Z
+Preferred-Languages: ru, en
+Canonical: https://sitozor.ru/.well-known/security.txt
+Policy: https://github.com/HackToolWork/web-audit-pro/blob/main/SECURITY.md
