@@ -16,23 +16,13 @@
 <meta name="theme-color" content="#1f4fb8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z' fill='%231f4fb8'/%3E%3Cpath d='m10.5 16 4 4 7-8' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/style.css">
-<script>
-(function () {
-  var saved = null;
-  try { saved = localStorage.getItem("lang"); } catch (e) {}
-  if (/bot|crawl|spider|slurp|yandex|google|bing|duckduck/i.test(navigator.userAgent)) return;
-  var preferred = (navigator.languages && navigator.languages[0]) || navigator.language || "";
-  if (saved === "en" || (!saved && preferred && !/^ru\b/i.test(preferred))) {
-    location.replace("/en/" + location.hash);
-  }
-})();
-</script>
+<script src="/assets/lang-redirect.js"></script>
 </head>
-<body>
+<body data-copy="Копировать" data-copied="Скопировано" data-failed="Не удалось">
 
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="currentColor" style="color:var(--accent)"/><path d="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Сайтозор</a>
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="currentColor" class="logo-fill"/><path d="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Сайтозор</a>
     <nav>
       <a href="#checks">Возможности</a>
       <a href="#install">Установка</a>
@@ -48,7 +38,8 @@
       <h1>Бесплатная проверка безопасности сайта — с понятным отчётом</h1>
       <p class="lead">Открытый инструмент: проверяет SSL-сертификат, защиту почты от подделки, настройки безопасности и плагины WordPress — и объясняет на русском языке, что не так и что именно сделать.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#install">Установить бесплатно</a>
+        <a class="btn btn-primary" href="https://app.sitozor.ru/?lang=ru">Проверить сайт бесплатно</a>
+        <a class="btn btn-ghost" href="#install">Установить инструмент</a>
         <a class="btn btn-ghost" href="/example-report.html" target="_blank" rel="noopener">Пример отчёта</a>
       </div>
       <p class="note">Открытый инструмент <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">web-audit-pro</a> под лицензией Apache-2.0 · звезда на GitHub помогает проекту</p>
@@ -132,16 +123,16 @@ python -m venv .venv
 .venv\Scripts\activate        <span class="c"># macOS: source .venv/bin/activate</span>
 python -m pip install .</pre><button type="button" class="copy">Копировать</button></div>
     </div>
-    <h3 style="margin:28px 0 10px">Проверка сайта</h3>
+    <h3 class="run-title">Проверка сайта</h3>
     <div class="code-wrap"><pre class="code">web-audit https://ваш-сайт.ru --company &quot;Моя студия&quot;</pre><button type="button" class="copy">Копировать</button></div>
-    <p class="sub" style="margin:0">Отчёты появятся в папке <code>reports/</code>; отчёт для владельца — файл <code>owner-report-*.html</code>. Язык отчёта берётся из настроек системы. Подробности — в <a href="https://github.com/HackToolWork/web-audit-pro#readme" target="_blank" rel="noopener">документации</a>.</p>
+    <p class="sub flush">Отчёты появятся в папке <code>reports/</code>; отчёт для владельца — файл <code>owner-report-*.html</code>. Язык отчёта берётся из настроек системы. Подробности — в <a href="https://github.com/HackToolWork/web-audit-pro#readme" target="_blank" rel="noopener">документации</a>.</p>
   </div>
 </section>
 
 <section id="monitoring">
   <div class="wrap">
     <h2>Не хотите ничего устанавливать?</h2>
-    <p class="sub">Готовим автоматический мониторинг: сервис сам проверяет сайт и пишет, если что-то сломалось. Бесплатная версия инструмента остаётся бесплатной навсегда.</p>
+    <p class="sub">Разовая бесплатная проверка в браузере уже работает на app.sitozor.ru. Готовим автоматический мониторинг: сервис сам проверяет сайт и пишет, если что-то сломалось. Бесплатная версия инструмента остаётся бесплатной навсегда.</p>
     <div class="free-vs">
       <div class="card">
         <h3>Инструмент</h3>
@@ -155,7 +146,7 @@ python -m pip install .</pre><button type="button" class="copy">Копирова
       </div>
       <div class="card soon">
         <span class="badge-soon">Скоро</span>
-        <h3 style="margin-top:12px">Мониторинг</h3>
+        <h3 class="card-title">Мониторинг</h3>
         <div class="price">от 390 ₽ <small>/ мес · планируемая цена</small></div>
         <ul>
           <li>Ничего не нужно устанавливать — только адрес сайта</li>
@@ -175,7 +166,7 @@ python -m pip install .</pre><button type="button" class="copy">Копирова
     
     <details class="faq"><summary>Это действительно бесплатно?</summary><p>Да. Инструмент распространяется с открытым кодом под лицензией Apache-2.0 — его можно использовать, в том числе в коммерческих целях. Платным будет только готовый сервис мониторинга, где не нужно ничего устанавливать.</p></details>
     <details class="faq"><summary>Это не взлом? Сайту ничего не будет?</summary><p>Нет. Инструмент делает только обычные запросы — такие же, как браузер при посещении сайта, — с ограничением скорости. Он не подбирает пароли, не отправляет вредоносные данные и не нагружает сервер. Проверяйте только свои сайты или сайты, на проверку которых у вас есть разрешение.</p></details>
-    <details class="faq"><summary>Нужно ли быть программистом?</summary><p>Нужно уметь установить программу и запустить одну команду в терминале — инструкция выше. Если это неудобно, подождите запуска мониторинга: там будет достаточно ввести адрес сайта.</p></details>
+    <details class="faq"><summary>Нужно ли быть программистом?</summary><p>Нет. Проверить сайт можно прямо в браузере на <a href="https://app.sitozor.ru/?lang=ru">app.sitozor.ru</a> — достаточно ввести адрес и подтвердить, что сайт ваш. Устанавливать инструмент нужно только тем, кто хочет запускать проверки сам.</p></details>
     <details class="faq"><summary>Откуда данные об уязвимостях WordPress?</summary><p>Из базы Wordfence Intelligence. Её можно бесплатно скачать командой <code>web-audit --update-wp-db</code> (нужен бесплатный API-ключ Wordfence) — дальше проверки работают без интернета.</p></details>
     <details class="faq"><summary>Гарантирует ли отчёт, что сайт не взломают?</summary><p>Нет, и мы честно об этом пишем. Автоматическая проверка находит самые распространённые проблемы, но не заменяет полноценный аудит безопасности.</p></details>
     <details class="faq"><summary>Как помочь проекту?</summary><p>Поставьте звезду на <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a>, расскажите коллегам, сообщайте об ошибках и предлагайте улучшения в Issues.</p></details>
@@ -189,7 +180,6 @@ python -m pip install .</pre><button type="button" class="copy">Копирова
   </div>
 </footer>
 
-<script>window.SITE_TEXT = {copy: "Копировать", copied: "Скопировано", failed: "Не удалось"};</script>
 <script src="/assets/site.js"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://sitozor.ru"
 GITHUB = "https://github.com/HackToolWork/web-audit-pro"
 TELEGRAM = "https://t.me/xxx_5d"
+APP = "https://app.sitozor.ru"
 
 ICONS = {
     "lock": '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
@@ -25,7 +26,7 @@ ICONS = {
 }
 SHIELD_LOGO = (
     '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 '
-    '6.9-1.6 12-7.5 12-15V7z" fill="currentColor" style="color:var(--accent)"/><path '
+    '6.9-1.6 12-7.5 12-15V7z" fill="currentColor" class="logo-fill"/><path '
     'd="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" '
     'stroke-linejoin="round"/></svg>'
 )
@@ -42,7 +43,8 @@ CONTENT = {
         "lead": "Открытый инструмент: проверяет SSL-сертификат, защиту почты от подделки, "
         "настройки безопасности и плагины WordPress — и объясняет на русском языке, что не так "
         "и что именно сделать.",
-        "cta_install": "Установить бесплатно",
+        "cta_check": "Проверить сайт бесплатно",
+        "cta_install": "Установить инструмент",
         "cta_example": "Пример отчёта",
         "hero_note": "Открытый инструмент <a href=\"$github\" target=\"_blank\" rel=\"noopener\">"
         "web-audit-pro</a> под лицензией Apache-2.0 · звезда на GitHub помогает проекту",
@@ -102,8 +104,9 @@ CONTENT = {
         "copied": "Скопировано",
         "copy_failed": "Не удалось",
         "monitoring_h2": "Не хотите ничего устанавливать?",
-        "monitoring_sub": "Готовим автоматический мониторинг: сервис сам проверяет сайт и пишет, "
-        "если что-то сломалось. Бесплатная версия инструмента остаётся бесплатной навсегда.",
+        "monitoring_sub": "Разовая бесплатная проверка в браузере уже работает на app.sitozor.ru. "
+        "Готовим автоматический мониторинг: сервис сам проверяет сайт и пишет, если что-то "
+        "сломалось. Бесплатная версия инструмента остаётся бесплатной навсегда.",
         "free_title": "Инструмент",
         "free_price": "0 ₽ <small>навсегда</small>",
         "free_points": [
@@ -133,9 +136,10 @@ CONTENT = {
              "запросы — такие же, как браузер при посещении сайта, — с ограничением скорости. Он не "
              "подбирает пароли, не отправляет вредоносные данные и не нагружает сервер. Проверяйте "
              "только свои сайты или сайты, на проверку которых у вас есть разрешение."),
-            ("Нужно ли быть программистом?", "Нужно уметь установить программу и запустить одну "
-             "команду в терминале — инструкция выше. Если это неудобно, подождите запуска "
-             "мониторинга: там будет достаточно ввести адрес сайта."),
+            ("Нужно ли быть программистом?", "Нет. Проверить сайт можно прямо в браузере на "
+             "<a href=\"https://app.sitozor.ru/?lang=ru\">app.sitozor.ru</a> — достаточно ввести "
+             "адрес и подтвердить, что сайт ваш. Устанавливать инструмент нужно только тем, кто "
+             "хочет запускать проверки сам."),
             ("Откуда данные об уязвимостях WordPress?", "Из базы Wordfence Intelligence. Её можно "
              "бесплатно скачать командой <code>web-audit --update-wp-db</code> (нужен бесплатный "
              "API-ключ Wordfence) — дальше проверки работают без интернета."),
@@ -161,7 +165,8 @@ CONTENT = {
         "lead": "An open-source tool that checks your SSL certificate, email spoofing protection, "
         "security settings and WordPress plugins — and explains in plain language what is wrong "
         "and exactly what to do.",
-        "cta_install": "Install for free",
+        "cta_check": "Check your site for free",
+        "cta_install": "Install the tool",
         "cta_example": "Example report",
         "hero_note": "Open-source <a href=\"$github\" target=\"_blank\" rel=\"noopener\">"
         "web-audit-pro</a> under the Apache-2.0 license · a star on GitHub helps the project",
@@ -221,8 +226,9 @@ CONTENT = {
         "copied": "Copied",
         "copy_failed": "Failed",
         "monitoring_h2": "Don't want to install anything?",
-        "monitoring_sub": "We are building automatic monitoring: the service checks your site on "
-        "its own and tells you when something breaks. The free tool stays free forever.",
+        "monitoring_sub": "A free one-off check in your browser already works at app.sitozor.ru. "
+        "We are building automatic monitoring: the service checks your site on its own and tells "
+        "you when something breaks. The free tool stays free forever.",
         "free_title": "Tool",
         "free_price": "$0 <small>forever</small>",
         "free_points": [
@@ -252,9 +258,10 @@ CONTENT = {
              "the same ones a browser makes when visiting a site — with rate limiting. It does not "
              "guess passwords, send malicious data or overload the server. Only check sites you "
              "own or are allowed to test."),
-            ("Do I need to be a programmer?", "You need to install the program and run one command "
-             "in a terminal — see the instructions above. If that is inconvenient, wait for the "
-             "monitoring service: entering your site's address will be enough."),
+            ("Do I need to be a programmer?", "No. You can check a site right in your browser at "
+             "<a href=\"https://app.sitozor.ru/?lang=en\">app.sitozor.ru</a>: enter the address and "
+             "confirm the site is yours. Installing the tool is only for people who want to run "
+             "checks themselves."),
             ("Where does the WordPress vulnerability data come from?", "From Wordfence "
              "Intelligence. You can download it for free with <code>web-audit --update-wp-db</code> "
              "(a free Wordfence API key is required); checks then work offline."),
@@ -272,17 +279,7 @@ CONTENT = {
 
 # Only the Russian root page redirects, once, for visitors whose browser prefers another
 # language and who have not chosen a language before. Crawlers are never redirected.
-AUTO_REDIRECT = """<script>
-(function () {
-  var saved = null;
-  try { saved = localStorage.getItem("lang"); } catch (e) {}
-  if (/bot|crawl|spider|slurp|yandex|google|bing|duckduck/i.test(navigator.userAgent)) return;
-  var preferred = (navigator.languages && navigator.languages[0]) || navigator.language || "";
-  if (saved === "en" || (!saved && preferred && !/^ru\\b/i.test(preferred))) {
-    location.replace("/en/" + location.hash);
-  }
-})();
-</script>"""
+AUTO_REDIRECT = '<script src="/assets/lang-redirect.js"></script>'
 
 TEMPLATE = Template("""<!doctype html>
 <html lang="$lang">
@@ -304,7 +301,7 @@ TEMPLATE = Template("""<!doctype html>
 <link rel="stylesheet" href="/assets/style.css">
 $redirect
 </head>
-<body>
+<body data-copy="$copy" data-copied="$copied" data-failed="$copy_failed">
 
 <div class="wrap">
   <header class="top">
@@ -324,7 +321,8 @@ $redirect
       <h1>$h1</h1>
       <p class="lead">$lead</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#install">$cta_install</a>
+        <a class="btn btn-primary" href="$app_url">$cta_check</a>
+        <a class="btn btn-ghost" href="#install">$cta_install</a>
         <a class="btn btn-ghost" href="${path}example-report.html" target="_blank" rel="noopener">$cta_example</a>
       </div>
       <p class="note">$hero_note</p>
@@ -391,9 +389,9 @@ python -m venv .venv
 .venv\\Scripts\\activate        <span class="c">$macos_comment</span>
 python -m pip install .</pre><button type="button" class="copy">$copy</button></div>
     </div>
-    <h3 style="margin:28px 0 10px">$run_h3</h3>
+    <h3 class="run-title">$run_h3</h3>
     <div class="code-wrap"><pre class="code">web-audit $site_placeholder$run_extra</pre><button type="button" class="copy">$copy</button></div>
-    <p class="sub" style="margin:0">$run_note</p>
+    <p class="sub flush">$run_note</p>
   </div>
 </section>
 
@@ -410,7 +408,7 @@ python -m pip install .</pre><button type="button" class="copy">$copy</button></
       </div>
       <div class="card soon">
         <span class="badge-soon">$soon</span>
-        <h3 style="margin-top:12px">$paid_title</h3>
+        <h3 class="card-title">$paid_title</h3>
         <div class="price">$paid_price</div>
         <ul>$paid_points</ul>
         <a class="btn btn-primary" href="$telegram" target="_blank" rel="noopener">$paid_cta</a>
@@ -433,7 +431,6 @@ python -m pip install .</pre><button type="button" class="copy">$copy</button></
   </div>
 </footer>
 
-<script>window.SITE_TEXT = {copy: "$copy", copied: "$copied", failed: "$copy_failed"};</script>
 <script src="/assets/site.js"></script>
 </body>
 </html>
@@ -479,6 +476,7 @@ def render(lang: str) -> str:
         site=SITE,
         github=GITHUB,
         telegram=TELEGRAM,
+        app_url=f"{APP}/?lang={lang}",
         logo=SHIELD_LOGO,
         brand="Сайтозор" if lang == "ru" else "Sitozor",
         other_lang=other,

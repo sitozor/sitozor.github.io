@@ -1,5 +1,7 @@
 (function () {
-  var text = window.SITE_TEXT || {copy: "Copy", copied: "Copied", failed: "Failed"};
+  // Button labels come from data attributes: a strict CSP allows no inline scripts.
+  var data = document.body.dataset;
+  var text = {copy: data.copy || "Copy", copied: data.copied || "Copied", failed: data.failed || "Failed"};
 
   document.querySelectorAll(".tabs button").forEach(function (tab) {
     tab.addEventListener("click", function () {

@@ -162,3 +162,7 @@ pre.code .c { color: #8a97b8; }
 }
 .lang-switch:hover { border-color: var(--accent); }
 header.top nav { margin-left: auto; }
+.logo-fill { color: var(--accent); }
+.run-title { margin: 28px 0 10px; }
+.sub.flush { margin: 0; }
+.card-title { margin-top: 12px; }

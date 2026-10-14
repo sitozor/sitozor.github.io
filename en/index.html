@@ -18,11 +18,11 @@
 <link rel="stylesheet" href="/assets/style.css">
 
 </head>
-<body>
+<body data-copy="Copy" data-copied="Copied" data-failed="Failed">
 
 <div class="wrap">
   <header class="top">
-    <a class="brand" href="/en/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="currentColor" style="color:var(--accent)"/><path d="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sitozor</a>
+    <a class="brand" href="/en/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 4 7v8c0 7.5 5.1 13.4 12 15 6.9-1.6 12-7.5 12-15V7z" fill="currentColor" class="logo-fill"/><path d="m10.5 16 4 4 7-8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sitozor</a>
     <nav>
       <a href="#checks">Features</a>
       <a href="#install">Install</a>
@@ -38,7 +38,8 @@
       <h1>Free website security check — with a report anyone can read</h1>
       <p class="lead">An open-source tool that checks your SSL certificate, email spoofing protection, security settings and WordPress plugins — and explains in plain language what is wrong and exactly what to do.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="#install">Install for free</a>
+        <a class="btn btn-primary" href="https://app.sitozor.ru/?lang=en">Check your site for free</a>
+        <a class="btn btn-ghost" href="#install">Install the tool</a>
         <a class="btn btn-ghost" href="/en/example-report.html" target="_blank" rel="noopener">Example report</a>
       </div>
       <p class="note">Open-source <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">web-audit-pro</a> under the Apache-2.0 license · a star on GitHub helps the project</p>
@@ -122,16 +123,16 @@ python -m venv .venv
 .venv\Scripts\activate        <span class="c"># macOS: source .venv/bin/activate</span>
 python -m pip install .</pre><button type="button" class="copy">Copy</button></div>
     </div>
-    <h3 style="margin:28px 0 10px">Check a site</h3>
+    <h3 class="run-title">Check a site</h3>
     <div class="code-wrap"><pre class="code">web-audit https://your-site.com --company &quot;My Studio&quot;</pre><button type="button" class="copy">Copy</button></div>
-    <p class="sub" style="margin:0">Reports appear in the <code>reports/</code> folder; the owner report is <code>owner-report-*.html</code>. The report language follows your system settings. See the <a href="https://github.com/HackToolWork/web-audit-pro#readme" target="_blank" rel="noopener">documentation</a> for details.</p>
+    <p class="sub flush">Reports appear in the <code>reports/</code> folder; the owner report is <code>owner-report-*.html</code>. The report language follows your system settings. See the <a href="https://github.com/HackToolWork/web-audit-pro#readme" target="_blank" rel="noopener">documentation</a> for details.</p>
   </div>
 </section>
 
 <section id="monitoring">
   <div class="wrap">
     <h2>Don&#x27;t want to install anything?</h2>
-    <p class="sub">We are building automatic monitoring: the service checks your site on its own and tells you when something breaks. The free tool stays free forever.</p>
+    <p class="sub">A free one-off check in your browser already works at app.sitozor.ru. We are building automatic monitoring: the service checks your site on its own and tells you when something breaks. The free tool stays free forever.</p>
     <div class="free-vs">
       <div class="card">
         <h3>Tool</h3>
@@ -145,7 +146,7 @@ python -m pip install .</pre><button type="button" class="copy">Copy</button></d
       </div>
       <div class="card soon">
         <span class="badge-soon">Coming soon</span>
-        <h3 style="margin-top:12px">Monitoring</h3>
+        <h3 class="card-title">Monitoring</h3>
         <div class="price"><small>Pricing will be announced</small></div>
         <ul>
           <li>Nothing to install — just your site&#x27;s address</li>
@@ -165,7 +166,7 @@ python -m pip install .</pre><button type="button" class="copy">Copy</button></d
     
     <details class="faq"><summary>Is it really free?</summary><p>Yes. The tool is open source under the Apache-2.0 license — you can use it, including commercially. Only the hosted monitoring service, where nothing needs to be installed, will be paid.</p></details>
     <details class="faq"><summary>Is this hacking? Will it harm my site?</summary><p>No. The tool only makes ordinary requests — the same ones a browser makes when visiting a site — with rate limiting. It does not guess passwords, send malicious data or overload the server. Only check sites you own or are allowed to test.</p></details>
-    <details class="faq"><summary>Do I need to be a programmer?</summary><p>You need to install the program and run one command in a terminal — see the instructions above. If that is inconvenient, wait for the monitoring service: entering your site's address will be enough.</p></details>
+    <details class="faq"><summary>Do I need to be a programmer?</summary><p>No. You can check a site right in your browser at <a href="https://app.sitozor.ru/?lang=en">app.sitozor.ru</a>: enter the address and confirm the site is yours. Installing the tool is only for people who want to run checks themselves.</p></details>
     <details class="faq"><summary>Where does the WordPress vulnerability data come from?</summary><p>From Wordfence Intelligence. You can download it for free with <code>web-audit --update-wp-db</code> (a free Wordfence API key is required); checks then work offline.</p></details>
     <details class="faq"><summary>Does the report guarantee my site won&#x27;t be hacked?</summary><p>No, and we say so honestly. An automated check finds the most common problems but does not replace a full security audit.</p></details>
     <details class="faq"><summary>How can I help?</summary><p>Star the project on <a href="https://github.com/HackToolWork/web-audit-pro" target="_blank" rel="noopener">GitHub</a>, tell your colleagues, report bugs and suggest improvements in Issues.</p></details>
@@ -179,7 +180,6 @@ python -m pip install .</pre><button type="button" class="copy">Copy</button></d
   </div>
 </footer>
 
-<script>window.SITE_TEXT = {copy: "Copy", copied: "Copied", failed: "Failed"};</script>
 <script src="/assets/site.js"></script>
 </body>
 </html>
